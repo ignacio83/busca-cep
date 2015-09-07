@@ -10,6 +10,8 @@ Arquitetura em 3 camadas (controller, service, repository).
 #Como iniciar o projeto
 mvn spring-boot:run -Dserver.port=8081
 
+Ajuste o parâmetro server.port para o valor de sua preferência.
+
 #Acessando a aplicação
 http://localhost:8081/
 
