@@ -9,10 +9,10 @@ Esse projeto utiliza spring-boot, spring-mvc, spring-data, spring-boot-actuator 
 * O controle transacional é realizado na camada service.
 
 #Como iniciar o projeto
-mvn spring-boot:run -Dserver.port=<port>
+mvn spring-boot:run -Dserver.port=8081
 
 #Acessando a aplicação
-http://localhost:8080/
+http://localhost:8081/
 
 A página inicial da aplicação é uma documentação escrita em swagger, os serviços apresentados aqui podem ser utilizados sem
 necessidade dessa interface HTML.
