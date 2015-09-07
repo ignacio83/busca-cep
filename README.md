@@ -14,7 +14,7 @@ mvn spring-boot:run -Dserver.port=8081
 #Acessando a aplicação
 http://localhost:8081/
 
-A página inicial da aplicação é uma documentação escrita em swagger, os serviços apresentados aqui podem ser utilizados sem
+A página inicial da aplicação é uma documentação escrita em swagger, os serviços listados podem ser utilizados sem
 necessidade dessa interface HTML.
 
 #CEPs previamente cadastrados
