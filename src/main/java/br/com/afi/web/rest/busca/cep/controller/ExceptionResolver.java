@@ -18,7 +18,7 @@ import br.com.afi.web.rest.busca.cep.domain.InvalidCepException;
  */
 @ControllerAdvice
 public class ExceptionResolver {
-	public static final int STATUS_CODE_INVALID_CEP = 410;
+	public static final int STATUS_CODE_INVALID_CEP = 420;
 
 	@ExceptionHandler(InvalidCepException.class)
     public void invalidCepExceptionHandler(Exception exception, HttpServletResponse response) throws IOException {
