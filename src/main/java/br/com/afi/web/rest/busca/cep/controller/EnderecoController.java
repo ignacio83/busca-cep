@@ -42,7 +42,7 @@ public class EnderecoController {
 	)
 	@ApiOperation(value="Obtém um endereço através do CEP informado")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, response=Endereco.class ,message = "Login realizado com sucesso"),
+			@ApiResponse(code = 200, response=Endereco.class ,message = "Consulta realizada com sucesso"),
 			@ApiResponse(code = InvalidCepExceptionResolver.STATUS_CODE, message = "CEP inválido"),
 			@ApiResponse(code = 599, message = "Erro inesperado")
 	})

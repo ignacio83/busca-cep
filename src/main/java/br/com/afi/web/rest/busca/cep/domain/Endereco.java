@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 /**
  * Representa um endereço. Não é vinculado a um cliente.
  * 
@@ -21,18 +23,23 @@ public class Endereco implements Serializable {
 
 	@Id
 	@Column(length=9)
+	@ApiModelProperty(value="CEP")
 	private String cep;
 	
 	@Column(length=50,nullable=false)
+	@ApiModelProperty(value="Logradouro")
 	private String logradouro;
 	
 	@Column(length=30,nullable=false)
+	@ApiModelProperty(value="Bairro")
 	private String bairro;
 	
 	@Column(length=20,nullable=false)
+	@ApiModelProperty(value="Cidade")
 	private String cidade;
 	
 	@Column(length=2,nullable=false)
+	@ApiModelProperty(value="Unidade Federal")
 	private String uf;
 	
 	/**
