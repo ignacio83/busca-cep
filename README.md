@@ -7,6 +7,9 @@ Esse projeto utiliza spring-boot, spring-mvc, spring-data, spring-boot-actuator 
 #Arquitetura
 Arquitetura em 3 camadas (controller, service, repository).
 
+#Healthcheck
+http://localhost:8080/health
+
 #Como iniciar o projeto
 mvn spring-boot:run -Dserver.port=8081
 
