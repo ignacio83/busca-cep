@@ -1,5 +1,6 @@
 package br.com.afi.web.rest.busca.cep.domain;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 
 import javax.persistence.Column;
@@ -15,8 +16,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="endereco")
-public class Endereco {
-	
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(length=9)
 	private String cep;
@@ -48,8 +50,11 @@ public class Endereco {
 	 * @param bairro Bairro
 	 * @param cidade Cidade
 	 * @param uf Unidade Federal
+	 * 
+	 * @throws InvalidCepException Lançado caso o CEP seja inválido 
 	 */
-	public Endereco(String cep, String logradouro, String bairro, String cidade, String uf) {
+	public Endereco(String cep, String logradouro, String bairro, String cidade, String uf) throws InvalidCepException {
+		validateCep(cep);
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
@@ -75,6 +80,18 @@ public class Endereco {
 
 	public String getBairro() {
 		return bairro;
+	}
+	
+	/**
+	 * Valida se é um CEP.
+	 * 
+	 * @param cep CEP
+	 * @throws InvalidCepException Caso o CEP seja inválido
+	 */
+	public static void validateCep(String cep) throws InvalidCepException{
+		if(cep==null || !cep.matches("[0-9]{8}")){
+			throw new InvalidCepException(cep);
+		}
 	}
 
 	@Override
