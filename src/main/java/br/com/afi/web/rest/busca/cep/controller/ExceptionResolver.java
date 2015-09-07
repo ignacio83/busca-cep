@@ -10,13 +10,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.afi.web.rest.busca.cep.domain.InvalidCepException;
 
+/**
+ * Exception Handler que indica o que irá ocorrer para cada uma das exceções.
+ * 
+ * @author André de Fontana Ignacio
+ * @version 1.0
+ */
 @ControllerAdvice
-public class InvalidCepExceptionResolver {
-	public static final int STATUS_CODE = 410;
+public class ExceptionResolver {
+	public static final int STATUS_CODE_INVALID_CEP = 410;
 
 	@ExceptionHandler(InvalidCepException.class)
-    public void resolveAndWriteException(Exception exception, HttpServletResponse response) throws IOException {
-        response.setStatus(STATUS_CODE);   
+    public void invalidCepExceptionHandler(Exception exception, HttpServletResponse response) throws IOException {
+        response.setStatus(STATUS_CODE_INVALID_CEP);   
         IOUtils.write(exception.getMessage(), response.getOutputStream());
     }
 }
