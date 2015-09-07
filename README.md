@@ -15,11 +15,11 @@ Ajuste o parâmetro server.port para o valor de sua preferência.
 #Acessando a aplicação
 http://localhost:8081/
 
-#Healthcheck
-http://localhost:8080/health
-
 A página inicial da aplicação é uma documentação escrita em swagger, os serviços listados podem ser utilizados sem
 necessidade dessa interface HTML.
+
+#Healthcheck
+http://localhost:8080/health
 
 #CEPs previamente cadastrados
 * 01001001 - Praça da Sé
