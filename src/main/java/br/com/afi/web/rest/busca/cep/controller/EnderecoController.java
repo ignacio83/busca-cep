@@ -1,26 +1,25 @@
 package br.com.afi.web.rest.busca.cep.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.com.afi.web.rest.busca.cep.domain.Endereco;
 import br.com.afi.web.rest.busca.cep.domain.InvalidCepException;
 import br.com.afi.web.rest.busca.cep.service.CepService;
-
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controlador REST que provê os serviços de busca de endereço através do CEP.
- * 
+ *
  * @author André de Fontana Ignacio
  * @version 1.0
  */
@@ -29,27 +28,26 @@ public class EnderecoController {
 
 	@Autowired
 	private CepService cepService;
-	
+
 	/**
 	 * Busca um endereço através do CEP.
-	 * 
+	 *
 	 * @param cep CEP
 	 * @return Endereço
-	 * @throws InvalidCepException 
 	 */
-	@RequestMapping(value="/endereco/{cep}", method=RequestMethod.GET,
-	        produces = MediaType.APPLICATION_JSON_VALUE
+	@GetMapping(value = "/endereco/{cep}",
+			produces = MediaType.APPLICATION_JSON_VALUE
 	)
-	@ApiOperation(value="Obtém um endereço através do CEP informado")
+	@Operation(summary = "Obtém um endereço através do CEP informado")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, response=Endereco.class ,message = "Consulta realizada com sucesso"),
-			@ApiResponse(code = ExceptionResolver.STATUS_CODE_INVALID_CEP, message = "CEP inválido")
+			@ApiResponse(responseCode = "200", description = "Consulta realizada com sucesso", content = @Content(schema = @Schema(implementation = Endereco.class))),
+			@ApiResponse(responseCode = "422", description = "CEP inválido", content = @Content(schema = @Schema(implementation = Error.class)))
 	})
-    public @ResponseBody Endereco buscaCep(
-    		@ApiParam(value="CEP", required=true) 
-    		@PathVariable("cep") String cep) throws InvalidCepException {
-		
-        return cepService.findByCep(cep);
-    }
+	public @ResponseBody Endereco buscaCep(
+			@Parameter(name = "cep", required = true)
+			@PathVariable("cep") String cep) throws InvalidCepException {
+
+		return cepService.findByCep(cep);
+	}
 
 }

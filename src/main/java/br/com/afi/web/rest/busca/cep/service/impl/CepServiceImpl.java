@@ -1,14 +1,13 @@
 package br.com.afi.web.rest.busca.cep.service.impl;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import br.com.afi.web.rest.busca.cep.domain.Endereco;
 import br.com.afi.web.rest.busca.cep.domain.InvalidCepException;
 import br.com.afi.web.rest.busca.cep.repository.EnderecoRepository;
 import br.com.afi.web.rest.busca.cep.service.CepService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementação das regras de negócio relacionadas a consulta de CEP.
@@ -28,10 +27,13 @@ public class CepServiceImpl implements CepService {
 		Endereco.validateCep(cep);
 		Endereco endereco = null;
 		if(!CEP_ZEROS.equals(cep)){
-			endereco = enderecoRepository.findOne(cep);
-			if(endereco==null){
+			final var opEndereco = enderecoRepository.findById(cep);
+			if(opEndereco.isEmpty()){
 				final String cepAjustado = substituiPorZerosDaDiretaParaEsquerda(cep);
 				endereco = findByCep(cepAjustado);
+			}
+			else {
+				endereco = opEndereco.get();
 			}
 		}
 		return endereco;
